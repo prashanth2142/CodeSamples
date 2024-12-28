@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace CodeSamples.SOLID
 {
+/*
+Objects of a superclass should be replaceable with objects of a subclass without affecting 
+the correctness of the program.
+
+If a class B is a subclass of class A, then objects of type A should be replaceable with objects of type B 
+without altering the desirable properties of the program (e.g., correctness, functionality).
+
+*/
     public class LiskovSubstitution
     {
         public abstract class Fruit
