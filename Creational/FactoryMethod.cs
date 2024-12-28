@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesignPatterns
+namespace CodeSamples.Creational
 {
     abstract class Creator
     {

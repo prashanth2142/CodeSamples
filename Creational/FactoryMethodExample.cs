@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Policy;
 
-namespace DesignPatterns
+namespace CodeSamples.Creational
 {
     // 1. Product Interface
     public interface ITransport

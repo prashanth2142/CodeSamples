@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CodeSamples.Program</StartupObject>
+    <StartupObject>CodeSamples.SOLID.LiskovSubstitution</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,8 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FactoryMethod.cs" />
-    <Compile Include="FactoryMethodExample.cs" />
+    <Compile Include="Behavioral\ChainOfResponsibility.cs" />
+    <Compile Include="Behavioral\Command.cs" />
+    <Compile Include="Behavioral\Mediator.cs" />
+    <Compile Include="Behavioral\Observer.cs" />
+    <Compile Include="Behavioral\Strategy.cs" />
+    <Compile Include="Creational\AbstractFactory.cs" />
+    <Compile Include="Creational\Singleton.cs" />
+    <Compile Include="SOLID\DependencyInversion.cs" />
+    <Compile Include="SOLID\InterfaceSegregation.cs" />
+    <Compile Include="SOLID\LiskovSubstitution.cs" />
+    <Compile Include="SOLID\OpenClosed.cs" />
+    <Compile Include="SOLID\SingleResponsibility.cs" />
+    <Compile Include="Structural\Adapter.cs" />
+    <Compile Include="Structural\Bridge.cs" />
+    <Compile Include="Structural\Composite.cs" />
+    <Compile Include="Structural\Decorator.cs" />
+    <Compile Include="Creational\FactoryMethod.cs" />
+    <Compile Include="Creational\FactoryMethodExample.cs" />
     <Compile Include="LSP.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,5 +71,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
