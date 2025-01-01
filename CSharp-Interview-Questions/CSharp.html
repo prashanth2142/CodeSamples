@@ -666,5 +666,258 @@ namespace DelegateExample {
 
         In summary, **delegates** provide the underlying mechanism for calling methods indirectly, while **events** provide a controlled way to notify subscribers when something happens.
     </p>
+    <p>
+        14. What are the different types of "USING/HAS A" relationship ?
+    </p>
+    <p>
+        In C#, the "USING/HAS A" relationship typically refers to the concept of object composition, where one class has or uses another class as part of its implementation. This type of relationship is often expressed through **composition** or **aggregation**. Here are the different types:
+
+        ### 1. **Composition (Strong "HAS A" relationship)**
+        - **Composition** represents a "strong" relationship where one object "owns" another, meaning if the containing object is destroyed, the contained object is also destroyed.
+        - This is usually implemented by having a class as a member of another class, and the lifecycle of the member is managed by the containing class.
+
+        **Example:**
+        <pre><code>
+        class Engine
+        {
+        public void Start()
+        {
+        Console.WriteLine("Engine starting...");
+        }
+        }
+
+        class Car
+        {
+        private Engine engine;
+
+        public Car()
+        {
+        engine = new Engine(); // Car "HAS A" Engine (Composition)
+        }
+
+        public void StartCar()
+        {
+        engine.Start();
+        Console.WriteLine("Car is now running.");
+        }
+        }
+
+        class Program
+        {
+        static void Main()
+        {
+        Car myCar = new Car();
+        myCar.StartCar();  // Output: Engine starting... Car is now running.
+        }
+        }
+          </code></pre>
+
+        In this example, the `Car` class "HAS A" `Engine`. The `Engine` is created inside the `Car` class, and it will be destroyed when the `Car` object is destroyed.
+
+        ---
+
+        ### 2. **Aggregation (Weaker "HAS A" relationship)**
+        - **Aggregation** is a "weaker" form of the "HAS A" relationship. The contained object can exist independently of the containing object. It signifies a "has-a" relationship but does not imply ownership or lifecycle management.
+        - The contained object can be shared between other objects.
+
+        **Example:**
+        <pre><code>
+        class Wheel
+        {
+        public void Rotate()
+        {
+        Console.WriteLine("Wheel rotating...");
+        }
+        }
+
+        class Car
+        {
+        private Wheel wheel;
+
+        public Car(Wheel wheel)
+        {
+        this.wheel = wheel; // Car "HAS A" Wheel (Aggregation)
+        }
+
+        public void Drive()
+        {
+        wheel.Rotate();
+        Console.WriteLine("Car is driving.");
+        }
+        }
+
+        class Program
+        {
+        static void Main()
+        {
+        Wheel wheel = new Wheel(); // Wheel exists independently
+        Car myCar = new Car(wheel); // Wheel is passed to Car (Aggregation)
+        myCar.Drive();  // Output: Wheel rotating... Car is driving.
+        }
+        }
+       </code></pre>
+
+        In this example, `Wheel` exists independently of the `Car`. Multiple cars could share the same wheel, and the wheel’s lifecycle is not tied to the car's lifecycle.
+
+        ---
+
+        ### 3. **Dependency (Using "HAS A" in terms of behavior)**
+        - **Dependency** refers to a situation where one object uses another to perform its tasks but does not "own" the other object. This is often described as a "using" relationship.
+        - It's typically a less formal relationship than composition and aggregation, where one class may interact with another through methods but without strong ownership.
+
+        **Example:**
+        <pre><code>
+        class Logger
+        {
+        public void Log(string message)
+        {
+        Console.WriteLine($"Log: {message}");
+        }
+        }
+
+        class Car
+        {
+        private Logger logger;
+
+        public Car(Logger logger)
+        {
+        this.logger = logger; // Car "USES" Logger
+        }
+
+        public void Drive()
+        {
+        logger.Log("Car is being driven.");
+        Console.WriteLine("Car is driving.");
+        }
+        }
+
+        class Program
+        {
+        static void Main()
+        {
+        Logger logger = new Logger();
+        Car myCar = new Car(logger); // Logger is passed to Car (Dependency)
+        myCar.Drive();  // Output: Log: Car is being driven. Car is driving.
+        }
+        }
+        </code></pre>
+
+        Here, the `Car` class "uses" the `Logger` class to log messages during driving. However, the `Car` does not own or manage the lifecycle of the `Logger`.
+
+        ---
+
+        ### Key Differences:
+        - **Composition**: Strong ownership, lifecycle tied together.
+        - **Aggregation**: Weaker ownership, the contained object exists independently.
+        - **Dependency**: One class uses another, but without ownership or lifecycle management.
+
+        Each type of relationship is suited to different scenarios based on how tightly or loosely the objects are connected in terms of ownership, lifecycle, and functionality.
+    </p>
+    <p>
+        15. Garbage Collector (GC)
+    </p>
+    <p>
+        The **Garbage Collector (GC)** in .NET runs automatically as part of the .NET runtime (CLR - Common Language Runtime), and its execution is managed by the runtime itself, not explicitly by the developer. Here's how it operates and who executes it:
+
+        ### 1. **Automatic Invocation by the CLR**:
+        - The GC is an integral part of the **Common Language Runtime (CLR)**, which is the execution engine of .NET applications. When you run a .NET application, the CLR is responsible for handling the execution of the code, including memory management.
+        - The GC is invoked by the CLR automatically during the program's execution, usually when it detects memory pressure (e.g., low memory), when the application allocates more objects, or when certain thresholds are reached in memory usage.
+        - **Program Execution Flow**: As your program runs, it makes requests for memory to the heap. The GC is responsible for cleaning up the memory once objects become unreachable, and the CLR decides when to run the GC based on factors like heap size and memory usage.
+
+        ### 2. **GC Triggers**:
+        The CLR decides when to invoke the GC based on the following conditions:
+        - **Memory Allocation Thresholds**: When a large number of objects are allocated, or the heap becomes full, the CLR may trigger a GC cycle.
+        - **Low Memory**: If the system is running low on memory, the GC may be triggered to free up space.
+        - **Manual Invocation**: Developers can call `GC.Collect()` explicitly, but this is generally discouraged as it can interfere with the automatic garbage collection process.
+
+        ### 3. **Execution Process**:
+        - **GC Threads**: The GC operates on a **separate thread** from the application's main execution threads. This means the GC runs in the background while your application executes. The GC can run concurrently with the application code (though it may stop execution for short periods during collection).
+        - **Thread Synchronization**: In a multithreaded application, the GC may synchronize with application threads to ensure that no objects are accessed while they are being collected. During a **GC pause**, all application threads are temporarily suspended, ensuring that objects are not modified during collection.
+
+        ### 4. **Generations**:
+        - As discussed earlier, the GC works in **generations**, which optimizes the collection process by focusing on younger generations more often. The CLR decides when to perform a collection based on which generation has accumulated objects.
+        - **Gen 0** (young objects) is collected most frequently, while **Gen 1** and **Gen 2** are collected less frequently.
+
+        ### 5. **Types of GC Operations**:
+        There are several types of GC operations:
+        - **Full GC**: This occurs when a collection is triggered for all generations (0, 1, and 2). It’s more costly and is typically triggered when a large amount of memory needs to be reclaimed.
+        - **Minor GC**: This occurs for just Generation 0 objects. Minor GC is relatively quicker since it only deals with young objects.
+        - **Concurrent GC**: In some cases, the GC can run concurrently with the application’s threads, particularly in .NET Core or .NET 5+ with features that allow background GC (to reduce pause times).
+
+        ### 6. **Finalization and Cleanup**:
+        - If an object has a **finalizer** (a method called before the object is destroyed), the GC will handle this during the collection process. Finalizers are queued for execution before the object’s memory is freed, but the timing is non-deterministic.
+        - After an object’s finalizer is executed, the object is marked for cleanup and memory is reclaimed.
+
+        ### 7. **Who Executes the GC?**
+        - **CLR and GC Thread**: The GC is executed by the CLR, specifically by a background **GC thread**. This is done automatically as part of the .NET runtime's internal mechanisms. Developers don't have to explicitly start or manage the GC process.
+        - **Managed by the Runtime**: The CLR (or .NET Runtime in newer versions) manages the GC lifecycle, so developers don’t need to worry about memory management details. However, understanding how the GC works can help improve application performance (e.g., by minimizing unnecessary object allocations and avoiding manual GC invocation unless necessary).
+
+        ### 8. **GC Execution in Different .NET Versions**:
+        - **.NET Framework**: The GC runs in the background, typically using a **stop-the-world** approach, where application threads are paused during collection.
+        - **.NET Core and .NET 5+**: In newer .NET versions, the GC has been improved to be more **concurrent**, minimizing pause times and allowing garbage collection to happen while the application continues running. This provides better performance for applications with high throughput or low-latency requirements.
+
+        ### Summary:
+        - The **Garbage Collector (GC)** is part of the **CLR** and is automatically executed by the runtime to manage memory.
+        - It runs in the background on a **separate thread** from the main application threads and is triggered based on memory pressure, allocations, or other conditions.
+        - The CLR manages the process, so developers don't need to manually invoke the GC except in special cases (e.g., calling `GC.Collect()`).
+        - The GC works efficiently through **generational collection** to minimize pauses and optimize memory management for .NET applications.
+    </p>
+    <p>
+        The **Garbage Collector (GC)** in .NET is an automatic memory management system that is responsible for reclaiming memory occupied by objects that are no longer in use by the application. This process helps prevent memory leaks by ensuring that unused objects are cleaned up, freeing memory for new allocations. Here's a deeper look into how it works:
+
+        ### Key Concepts of Garbage Collection
+
+        1. **Automatic Memory Management**:
+        The GC is designed to handle memory management automatically, so developers do not have to manually allocate and deallocate memory (like in languages such as C or C++). This helps in reducing errors like memory leaks and dangling pointers.
+
+        2. **Heap and Stack**:
+        - **Heap**: This is the area of memory used for dynamic memory allocation where objects are created. The garbage collector manages memory in the heap.
+        - **Stack**: This is used for storing method calls and local variables. The stack is managed automatically by the runtime and does not require garbage collection.
+
+        3. **Reference Counting and Reachability**:
+        The GC tracks the references to objects in memory. If an object is no longer referenced (i.e., there are no active pointers or references to it), the object is considered unreachable and eligible for garbage collection.
+
+        ### How the Garbage Collector Works
+
+        1. **Marking Phase**:
+        - The GC starts by identifying which objects are still in use. It begins with "root" objects, such as static variables, local variables in method calls, and CPU registers.
+        - From these roots, it traces all objects that are reachable (objects directly or indirectly referenced). These are marked as "alive."
+
+        2. **Sweeping Phase**:
+        - After the marking phase, all the unreachable (unreferenced) objects are considered for cleanup. These objects are removed from memory to free up space.
+
+        3. **Compaction Phase**:
+        - To avoid fragmentation of memory, the GC may compact the heap after collecting garbage. This involves moving the surviving objects together, reducing gaps between them, so there’s a contiguous block of free memory for new allocations.
+
+        This step is more expensive in terms of time but improves memory management in the long term.
+
+        ### Generational Garbage Collection
+
+        .NET's GC uses a **generational model** to optimize the collection process. Objects are organized into three generations:
+        - **Generation 0**: Newly allocated objects. Most objects die young, so Generation 0 is collected more frequently.
+        - **Generation 1**: Objects that survived one or more garbage collections from Generation 0. These are less likely to become unreachable quickly.
+        - **Generation 2**: Long-lived objects, often those that survive several collections. The GC collects Generation 2 less frequently, as these objects are assumed to be in use for longer periods.
+
+        This generational approach helps improve performance because collecting older generations is more expensive, and objects that survive longer tend to be less likely to become unreachable.
+
+        ### Finalization and IDisposable
+
+        - **Finalization**: Objects can have a `Finalize` method (also called a destructor in C#) to clean up unmanaged resources before the object is reclaimed by the GC. This method is called by the GC before the object’s memory is freed.
+        - However, finalization is not guaranteed to occur immediately, which can lead to delayed cleanup of resources.
+
+        - **IDisposable Interface**: For objects that use unmanaged resources (e.g., file handles, database connections), .NET provides the `IDisposable` interface, which defines a `Dispose` method. Developers can manually call `Dispose()` to release unmanaged resources, rather than relying on finalization.
+
+        ### GC and Performance
+
+        - **Non-Deterministic**: The garbage collector runs asynchronously and is non-deterministic, meaning you cannot predict exactly when it will occur. The timing depends on memory usage and the GC’s internal decisions.
+        - **GC.Collect()**: While garbage collection usually runs automatically, developers can explicitly trigger it using `GC.Collect()`. However, this is generally discouraged because manual GC collection may harm performance if done excessively. It is better to let the GC run on its own.
+
+        ### Summary
+
+        The **Garbage Collector (GC)** is an essential part of the .NET runtime that automatically manages memory by identifying and reclaiming memory occupied by objects that are no longer in use. It works in a generational manner to optimize performance, and it helps prevent memory leaks by handling both managed and unmanaged resources efficiently. However, developers still need to be cautious with unmanaged resources by implementing the `IDisposable` pattern and using `Dispose()` appropriately.
+    </p>
+    <p>
+
+    </p>
 </body>
 </html>
