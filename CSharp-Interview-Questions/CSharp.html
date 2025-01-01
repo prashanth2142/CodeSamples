@@ -1,0 +1,670 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            font-family: 'Verdana', sans-serif;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 2;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .custom-font {
+            font-family: 'Courier New', monospace;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: Consolas, monospace;
+            font-size: 16px;
+            color: #333;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow: auto;
+        }
+
+        code {
+            color: #d6336c;
+        }
+    </style>
+</head>
+<body>
+    <p> 1. What is IL ( Intermediate Language) Code ?</p>
+    <p>
+        Intermediate Language (IL) code, also known as Microsoft Intermediate Language (MSIL) or Common Intermediate Language (CIL), is a low-level, platform-independent programming language. It is a key part of the .NET framework and serves as an intermediate step between the code written in high-level languages like C# and the machine code executed by the processor.
+        How IL Works:
+
+        Compilation:
+        When you write code in C#, it is compiled by the C# compiler (csc.exe) into IL code.
+        The resulting output is a DLL or EXE file, which contains IL along with metadata describing the program's structure (types, members, etc.).
+
+        Just-In-Time (JIT) Compilation:
+        At runtime, the IL code is compiled into native machine code by the Just-In-Time (JIT) compiler provided by the Common Language Runtime (CLR).
+        This native code is then executed by the processor.
+
+        Platform Independence:
+        Because IL is platform-independent, the same compiled assembly can run on any platform where the .NET runtime is supported.
+
+        Key Features of IL:
+
+        Stack-based architecture: IL is designed as a stack-based language, where operations are performed on a virtual stack.
+        Object-oriented: IL supports concepts like inheritance, polymorphism, and exception handling.
+        Rich instruction set: IL includes instructions for loading, storing, arithmetic operations, method calls, branching, etc.
+        Strong typing: IL is strongly typed, ensuring type safety and enabling features like garbage collection and runtime type checking.
+    </p>
+    <p> 2. What is CLR? </p>
+    <p>
+        The **Common Language Runtime (CLR)** is the core runtime environment in the .NET framework. It serves as the execution engine for .NET applications, providing services such as memory management, type safety, exception handling, and garbage collection. The CLR is responsible for managing the execution of code written in any .NET-supported language.
+
+        ### Key Responsibilities of CLR:
+
+        1. **Just-In-Time (JIT) Compilation**:
+        - When you compile your C# code, it gets converted into Intermediate Language (IL) code. At runtime, the CLR's JIT compiler translates this IL code into native machine code specific to the operating system and hardware.
+
+        2. **Memory Management**:
+        - The CLR manages memory allocation and deallocation for .NET applications.
+        - It includes an automatic **Garbage Collector (GC)** to reclaim memory occupied by objects no longer in use.
+
+        3. **Type Safety**:
+        - Ensures that code adheres to strict type rules, preventing operations that could lead to memory corruption or unpredictable behavior.
+
+        4. **Code Execution**:
+        - The CLR loads assemblies, performs runtime type checking, and ensures secure execution of the code.
+
+        5. **Security**:
+        - Provides mechanisms such as Code Access Security (CAS) and role-based security to protect against unauthorized code execution.
+
+        6. **Exception Handling**:
+        - Offers a consistent framework for error and exception handling across different .NET languages.
+
+        7. **Interoperability**:
+        - Facilitates interaction between .NET code and unmanaged code (e.g., native C++ libraries or Windows API calls).
+
+        8. **Multithreading**:
+        - Provides support for multithreaded applications and synchronization.
+
+        ---
+
+        ### How CLR Works:
+
+        1. **Compilation Process**:
+        - High-level code (C#, VB.NET, etc.) → **Intermediate Language (IL)** → **Machine Code** (via JIT at runtime).
+
+        2. **Execution**:
+        - When a .NET application starts, the CLR initializes, loads required assemblies, and compiles IL to native code. This code is executed by the CPU.
+
+        3. **Managed vs. Unmanaged Code**:
+        - Code executed under the control of the CLR is called **managed code**.
+        - Code that runs outside the CLR (e.g., native C++) is referred to as **unmanaged code**.
+
+        ---
+
+        ### CLR Features:
+        - **Cross-Language Interoperability**: Enables the use of multiple languages (e.g., C#, F#, VB.NET) in a single application.
+        - **Portability**: Provides platform independence, allowing .NET applications to run on different operating systems using the same IL.
+        - **Extensibility**: Supports the addition of custom libraries and runtime extensions.
+        - **Debugging Support**: Works with tools like Visual Studio for efficient debugging and profiling.
+
+        ---
+
+        ### Benefits of CLR:
+        1. Simplifies development by managing low-level programming tasks (e.g., memory allocation).
+        2. Increases application reliability and security.
+        3. Promotes code reusability and modular design through managed libraries.
+        4. Provides a rich runtime environment for rapid application development.
+
+        Would you like to explore specific aspects, like how CLR handles JIT or garbage collection?
+    </p>
+    <p> 3. What is the use of JIT ( Just in time compiler) ? </p>
+    <p>
+        The Just-In-Time (JIT) Compiler is a crucial component of modern runtime environments, such as the .NET Common Language Runtime (CLR) or the Java Virtual Machine (JVM). Its primary purpose is to improve the execution performance of applications by converting intermediate code into machine code at runtime. Here's a detailed explanation of its use:
+        Key Uses of JIT Compiler:
+
+        Dynamic Translation:
+        JIT converts Intermediate Language (IL) or bytecode into native machine code just before execution.
+        For example, in .NET, the C# code is first compiled into CIL (Common Intermediate Language), which is then JIT-compiled into machine code when the application runs.
+
+        Improved Performance:
+        By compiling code to native machine code, JIT can optimize execution based on the specific hardware and runtime conditions.
+        Native machine code is faster to execute than interpreting bytecode directly.
+
+        Platform Independence:
+        Allows applications to run on different platforms without recompilation. The intermediate code is platform-independent, and the JIT compiler generates machine-specific code at runtime.
+
+        Runtime Optimizations:
+        JIT can apply optimizations that are only possible during execution, such as:
+        Inlining: Replacing a function call with its code to avoid the overhead of calling functions.
+        Loop unrolling: Improving the performance of loops.
+        Dead code elimination: Removing unused or unnecessary code paths.
+
+        Memory Efficiency:
+        JIT compiles only the portions of code that are needed during execution, reducing the overall memory footprint compared to precompiling the entire application.
+
+        Security:
+        JIT compilers can enforce security checks, such as verifying type safety and access permissions, before translating intermediate code to native machine code.
+
+        Support for Managed Code:
+        In managed environments like .NET or Java, the JIT compiler works with the garbage collector and other runtime services to ensure the application runs safely and efficiently.
+    </p>
+    <p> 4.  What is the importance of CTS and CLS ?</p>
+    <p>
+        Common Language Specification (CLS)
+
+        Purpose:
+        The CLS defines a set of rules and constraints that all .NET languages must follow to ensure interoperability. It specifies the features that are common across all .NET languages, making it possible for components written in one language to be used in another.
+
+        Importance:
+
+        Language Interoperability: Ensures that different languages on the .NET platform can work together seamlessly. For instance, a class written in C# can be consumed by a VB.NET program.
+        Subset of Features: Only includes features that are common and can be supported by all .NET languages. For example, certain advanced C# features (like pointers in unsafe code) may not be CLS-compliant.
+        Cross-language Reusability: Allows developers to create libraries that can be used across multiple .NET languages.
+
+        Common Type System (CTS)
+
+        Purpose:
+        The CTS standardizes how data types are defined, used, and managed in the .NET framework. It ensures that types in different languages are compatible and can interact with each other.
+
+        Importance:
+
+        Type Consistency: Provides a unified type system that ensures all .NET languages use the same underlying type definitions (e.g., int in C# and Integer in VB.NET are both mapped to System.Int32).
+        Enables Code Sharing: Facilitates the sharing of code and data structures across languages by standardizing types.
+        Standardized Data Types: Avoids confusion by ensuring that, for example, an int in one language is the same as an int in another.
+
+        CTS has two categories of types:
+
+        Value Types: Types that are stored on the stack (e.g., int, float, bool).
+        Reference Types: Types that are stored on the heap (e.g., class, object, string).
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <strong>Feature</strong>
+                    </th>
+                    <th>
+                        <strong>CLS</strong>
+                    </th>
+                    <th>
+                        <strong>CTS</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>Definition</strong>
+                    </td>
+                    <td>A set of rules for language interoperability.</td>
+                    <td>A specification for defining and managing data types.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Focus</strong>
+                    </td>
+                    <td>Common features across .NET languages.</td>
+                    <td>Consistency in data types across .NET languages.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Primary Benefit</strong>
+                    </td>
+                    <td>Enables cross-language integration.</td>
+                    <td>Ensures type compatibility.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </p>
+    <p> 5. Difference between Stack vs Heap ?</p>
+    <p>
+        Stack:
+
+        Definition: Stack is a region of memory used for storing value types and references to objects in the heap.
+
+        Key Features:
+        Managed Memory: Automatically managed by the system. Memory is allocated and deallocated in a Last In, First Out (LIFO) manner.
+        Storage: Holds:
+        Local variables (value types).
+        References to objects in the heap (when dealing with reference types).
+        Scope-Limited: Memory allocated on the stack is freed once the method or block of code completes execution.
+        Performance: Fast access due to its LIFO nature.
+        Size Limitation: Stack has a fixed size, determined at the start of the program. Exceeding this size can cause a StackOverflowException.
+
+
+        void Example() {
+        int x = 10; // Stored on the stack (value type)
+        }
+
+        Heap is a region of memory used for dynamically allocated memory, typically for objects and data structures that need to persist beyond a single method call.
+
+        Key Features:
+
+        Managed Memory: Garbage Collector (GC) automatically handles memory allocation and deallocation.
+        Storage: Holds:
+        Objects (reference types).
+        Variables allocated dynamically using new.
+        Lifetime: Objects remain in memory until no references exist, at which point the GC removes them.
+        Performance: Access is slower compared to the stack due to the need for reference dereferencing.
+        Size: Heap size is larger and can grow dynamically based on the application's requirements.
+
+        void Example() {
+        string str = new string("Hello"); // Object allocated on the heap
+        }
+
+        Use stack for small, short-lived variables (e.g., method-local variables).
+        Use heap for larger, more complex objects that need to persist beyond a single method scope.
+    </p>
+    <p> 6. What are Value types & Reference types?</p>
+    <p>
+        Value Types
+
+        Value types hold data directly in memory. When a value type is assigned to another variable, a copy of the value is created. These types are stored on the stack.
+
+        Examples of value types:
+        Primitive types: int, double, float, char, bool
+        Structs: DateTime, custom structs
+        Enumerations: enum
+
+        int a = 10;
+        int b = a;  // 'b' is a copy of 'a'
+        b = 20;
+
+        Console.WriteLine(a);  // Output: 10
+        Console.WriteLine(b);  // Output: 20
+        In this example, modifying b does not affect a because a and b hold copies of the value.
+        <br />
+
+         
+        Reference types hold a reference to the memory location where the data is stored, rather than the actual data itself. When a reference type is assigned to another variable, both variables refer to the same memory location. These types are stored on the heap.
+
+        Examples of reference types:
+        Classes: class
+        Arrays: int[], string[]
+        Delegates
+        Strings (though immutable, it's a reference type)
+
+        <br />
+
+        class Person
+        {
+        public string Name;
+        }
+
+        Person person1 = new Person();
+        person1.Name = "Alice";
+        Person person2 = person1;  // 'person2' refers to the same object as 'person1'
+        person2.Name = "Bob";
+
+        Console.WriteLine(person1.Name);  // Output: Bob
+        Console.WriteLine(person2.Name);  // Output: Bob
+
+
+    </p>
+    <p> 7. What are generic collections ?</p>
+    <p>  In C#, generic collections are classes provided by the .NET framework that allow you to store and manipulate data in a type-safe manner. These collections allow you to specify the type of elements they store at compile-time, meaning the types are checked during compilation, ensuring type safety and reducing runtime errors.
+Common Types of Generic Collections:
+
+    List<T> – Represents a strongly typed list of objects.
+    Dictionary<TKey, TValue> – Represents a collection of key/value pairs.
+    Queue<T> – Represents a first-in, first-out (FIFO) collection of objects.
+    Stack<T> – Represents a last-in, first-out (LIFO) collection of objects.
+    HashSet<T> – Represents a collection of unique elements.
+    </p>
+    <p> 8. What are threads (Multithreading)? </p>
+    <p>
+        A thread is the smallest unit of execution in a program. It represents an individual path of execution, allowing multiple tasks to run concurrently. Threads enable multitasking, making programs more efficient by utilizing the CPU resources better.
+        Key Concepts of Threads:
+
+        Main Thread: The default thread that runs when a C# program starts. All tasks executed in the program run on this thread unless other threads are created.
+        Thread Class: C# provides the System.Threading.Thread class to work with threads. This class allows creating, starting, and managing threads in your application.
+        Thread Pool: The .NET runtime maintains a thread pool to handle multiple threads efficiently by reusing threads.
+
+        Multithreading is the process of running multiple threads concurrently in a program.
+        Each thread can perform a different task independently, leading to better resource utilization and faster performance
+        in scenarios such as I/O operations or heavy computations.
+        <pre><code>
+        class Program
+        {
+        // Method to be run on a separate thread
+        static void PrintNumbers()
+        {
+        for (int i = 1; i <= 5; i++)
+        {
+        Console.WriteLine(i);
+        Thread.Sleep(1000);  // Simulating work by making the thread sleep for 1 second
+        }
+        }
+
+        static void PrintAlphabets()
+        {
+        char letter = 'A';
+        for (int i = 0; i < 5; i++)
+        {
+        Console.WriteLine(letter);
+        letter++;
+        Thread.Sleep(1000);  // Simulating work by making the thread sleep for 1 second
+        }
+        }
+
+        static void Main(string[] args)
+        {
+        // Creating threads
+        Thread thread1 = new Thread(PrintNumbers);
+        Thread thread2 = new Thread(PrintAlphabets);
+
+        // Starting the threads
+        thread1.Start();
+        thread2.Start();
+
+        // Wait for both threads to complete
+        thread1.Join();
+        thread2.Join();
+
+        Console.WriteLine("Both threads have completed their tasks.");
+        }
+        }
+            </code></pre>
+
+        The Start() method starts both threads concurrently.
+        The Join() method is used to ensure that the main thread waits for both threads to complete their execution before printing the final message.
+    </p>
+    <p>
+        9. Why do we need constructors ?
+    </p>
+    <p>
+        A constructor allows you to set up an object with initial values at the time of its creation.
+        Without a constructor, you would need to call separate methods or manually set each property after object creation, which can be less convenient and error-prone.
+        Constructors can include logic to validate or process data before assigning it to the object's properties.
+        This ensures that the object is always in a valid state upon creation.
+        Constructors in C# can be overloaded to allow multiple ways to create an object with different levels of initialization.
+        Static constructors initialize static members of a class. They are called automatically before the first use of the class and ensure class-level fields are set up properly.
+        Constructors improve code clarity, maintainability, and safety by centralizing initialization logic and ensuring objects are always in a consistent state.
+    </p>
+    <p>
+        10. Can we do Multiple inheritance with Abstract classes ?
+    </p>
+    <p>
+        Multiple inheritance is not supported with classes (including abstract classes).
+        This limitation is intentional to avoid the diamond problem and to simplify the complexity of the language's inheritance model.
+
+        Instead of supporting multiple inheritance, C# allows a class to implement multiple interfaces, which achieves similar flexibility
+        without the ambiguities of multiple inheritance.
+
+        Why Multiple Inheritance with Abstract Classes is Not Supported
+
+        Ambiguity in Inheritance: If two parent classes define methods or properties with the same name, it becomes unclear which method or property should take precedence in the derived class.
+
+        Diamond Problem: In cases where a class inherits from two classes that themselves inherit from a common base class, it creates ambiguity about which version of the base class members to inherit.
+    </p>
+    <p> 11.  What is the need of Delegates ?</p>
+    <p>
+        Delegates in C# are objects that represent references to methods with a specific parameter list and return type. They are essential because they allow methods to be passed as parameters, enabling more flexible and dynamic code.
+
+        ### Why do we need delegates?
+
+        1. **Encapsulation of Method References**: They allow you to pass methods as parameters, which enables high levels of abstraction and flexibility.
+        2. **Event Handling**: In C#, delegates are used for defining events and callback methods. They help decouple the event sender and the event handler, making it easier to add or remove event listeners dynamically.
+        3. **Multithreading**: Delegates can be used to invoke methods asynchronously (using `BeginInvoke`/`EndInvoke` or the newer `Task` approach), which is useful for multithreading and non-blocking calls.
+
+        ### Example: Real-Time Scenario (Event Handling)
+
+        Consider a scenario where you are building a notification system, and you want to notify multiple systems or users when a new user signs up. Instead of directly calling each notification method in your `SignUp` method, you can use delegates and events.
+
+        <pre><code>
+        using System;
+
+namespace DelegateExample {
+  // Define a delegate type for notification methods
+  public delegate void NotifyUser(string message);
+
+  // Class that raises an event (Publisher)
+  public class UserSignUp {
+    public event NotifyUser OnUserSignUp; // Event using the delegate
+
+    public void SignUp(string userName) {
+      Console.WriteLine($"{userName} has signed up.");
+
+      // Raise the event to notify all subscribers
+      OnUserSignUp?.Invoke($"{userName} has successfully signed up!");
+    }
+  }
+
+  // Class that handles the notification (Subscriber)
+  public class NotificationService {
+    public void SendEmail(string message) {
+      Console.WriteLine($"Email Sent: {message}");
+    }
+
+    public void SendSMS(string message) {
+      Console.WriteLine($"SMS Sent: {message}");
+    }
+  }
+
+  class Program {
+    static void Main(string[] args) {
+      UserSignUp userSignUp = new UserSignUp();
+      NotificationService notificationService = new NotificationService();
+
+      // Subscribe to the event using delegates
+      userSignUp.OnUserSignUp += notificationService.SendEmail;
+      userSignUp.OnUserSignUp += notificationService.SendSMS;
+
+      // Simulate user sign-up
+      userSignUp.SignUp("John Doe");
+    }
+  }
+}
+        </code></pre>
+
+        ### Explanation:
+        - **Delegate**: `NotifyUser` is a delegate type that defines a method signature.
+        - **Event**: The `UserSignUp` class declares an event `OnUserSignUp` of type `NotifyUser`. Events are based on delegates and are used to notify other components.
+        - **Subscribing to Event**: In `Main`, we create a `NotificationService` instance and subscribe its methods `SendEmail` and `SendSMS` to the `OnUserSignUp` event.
+        - **Raising Event**: When the `SignUp` method is called, it raises the event, notifying all subscribed methods (email and SMS in this case).
+
+        ### Benefits:
+        1. **Decoupling**: The `UserSignUp` class doesn't know how the notification will be sent. It simply raises the event, and the `NotificationService` handles it.
+        2. **Extensibility**: If you want to add more notification methods (e.g., push notifications, in-app alerts), you just need to subscribe new methods to the `OnUserSignUp` event without modifying the `UserSignUp` class.
+
+        ### Key Points:
+        - Delegates help in making your code more flexible and reusable.
+        - They are used in scenarios like event handling, callbacks, and implementing strategies.
+    </p>
+    <p>
+       12. What are events ?
+    </p>
+    <p>
+        In C#, **events** are a special type of **delegate** used to provide notifications when something happens in the application. Events are commonly used in the context of **publisher-subscriber** scenarios, where an object (the publisher) raises an event, and other objects (the subscribers) respond to that event.
+
+        ### Key Characteristics of Events:
+        1. **Encapsulation of Delegate**: An event is essentially a wrapper around a delegate. It allows the publisher to invoke the event, and the subscribers can handle it, but the publisher can control who can subscribe or unsubscribe.
+        2. **Unidirectional**: Unlike a delegate, where you can both call and subscribe to methods, events allow only the publisher to raise the event, while subscribers can only listen for the event.
+        3. **Multicast**: Events support multiple subscribers, so more than one method can handle the same event.
+
+        ### Why are Events Used?
+        - **Loose Coupling**: Events provide a way to decouple the logic between the publisher and the subscribers, making your code more modular and flexible.
+        - **Asynchronous Notification**: In many scenarios, you want to notify multiple components of an action without tightly coupling them together. Events allow you to send notifications to all subscribers asynchronously.
+        - **UI Event Handling**: In GUI frameworks like Windows Forms or WPF, events are used to handle user interactions such as button clicks, key presses, etc.
+
+        ### Example: Simple Event Handling in C#
+
+        <pre><code>
+        using System;
+
+        namespace EventExample
+        {
+        // Declare a delegate type
+        public delegate void Notify(string message);
+
+        // Publisher class
+        public class Publisher
+        {
+        // Declare an event based on the delegate
+        public event Notify OnNotification;
+
+        // Method to trigger the event
+        public void TriggerEvent(string message)
+        {
+        // Raise the event if there are any subscribers
+        OnNotification?.Invoke(message);
+        }
+        }
+
+        // Subscriber class
+        public class Subscriber
+        {
+        public void HandleEvent(string message)
+        {
+        Console.WriteLine($"Event received: {message}");
+        }
+        }
+
+        class Program
+        {
+        static void Main(string[] args)
+        {
+        // Instantiate the publisher and subscriber
+        Publisher publisher = new Publisher();
+        Subscriber subscriber = new Subscriber();
+
+        // Subscribe to the event
+        publisher.OnNotification += subscriber.HandleEvent;
+
+        // Trigger the event
+        publisher.TriggerEvent("Hello, this is a test event!");
+        }
+        }
+        }
+         </code></pre>
+
+        ### Explanation:
+        1. **Delegate**: `Notify` is a delegate type that defines the signature of the event handler methods.
+        2. **Event**: The `Publisher` class declares an event `OnNotification` of type `Notify`. This event can be raised by the publisher and handled by any subscribed methods.
+        3. **Subscriber**: The `Subscriber` class defines a method `HandleEvent` to handle the event when it is triggered.
+        4. **Subscribing to the Event**: In the `Main` method, the subscriber subscribes to the `OnNotification` event of the publisher using the `+=` operator.
+        5. **Raising the Event**: When `TriggerEvent` is called on the publisher, it raises the event by invoking the delegate, which calls the subscribed methods (`HandleEvent` in this case).
+
+        ### Benefits of Events:
+        1. **Encapsulation**: The publisher can raise events but cannot directly invoke the subscribed methods, making it safer and preventing accidental invocation.
+        2. **Multicast**: You can have multiple subscribers to the same event, allowing different methods to handle the event in parallel.
+        3. **Loose Coupling**: The publisher does not need to know anything about the subscribers. It only raises the event, and any object can handle it by subscribing.
+
+        ### Real-World Example: UI Events
+        In a GUI application, a button might have a click event. The button doesn't know what action will happen when it is clicked; it just triggers the `Click` event. Multiple components (subscribers) might be interested in handling that event (e.g., displaying a message, updating a UI element, or saving data). Events allow this dynamic behavior without tightly coupling the button to the specific actions.
+
+        ### Summary:
+        - **Events** are a way of providing notifications from a publisher to subscribers.
+        - **Events** are based on **delegates** but offer a more controlled way of subscribing and unsubscribing.
+        - Events are useful for **asynchronous notifications**, **UI interaction**, and **loose coupling** between components in your applications.
+    </p>
+    <p>
+        13. Delegate VS Events.
+    </p>
+    <p>
+        In C#, **delegates** and **events** are both used to handle callbacks or notifications, but they have key differences in their purpose and usage.
+
+        ### **Delegate**
+        A **delegate** is a type that defines a method signature. It can be used to reference methods with a matching signature and can be invoked like a regular method. Delegates are primarily used to implement event-driven programming but can be used on their own as well.
+
+        **Example of Delegate:**
+        <pre><code>
+        using System;
+
+        public class Program
+        {
+        // Define a delegate type
+        public delegate void GreetDelegate(string name);
+
+        public static void Main(string[] args)
+        {
+        // Create an instance of the delegate
+        GreetDelegate greet = new GreetDelegate(Greet);
+
+        // Invoke the delegate
+        greet("John");
+        }
+
+        // Method to match delegate signature
+        public static void Greet(string name)
+        {
+        Console.WriteLine($"Hello, {name}!");
+        }
+        }
+         </code></pre>
+        **Output:**
+        ```
+        Hello, John!
+        ```
+
+        ### **Event**
+        An **event** is a special kind of delegate used primarily for signaling state changes or user interactions in an object-oriented way. An event is tied to a specific delegate type and provides a controlled mechanism to handle subscriptions and unsubscriptions.
+
+        - Events restrict direct invocation from outside the class (only the class itself can raise the event).
+        - Event handlers can be added or removed using the `+=` and `-=` operators.
+
+        **Example of Event:**
+        <pre><code>
+        using System;
+
+        public class Program
+        {
+        // Define a delegate type for the event
+        public delegate void NotifyDelegate(string message);
+
+        // Declare the event
+        public static event NotifyDelegate Notify;
+
+        public static void Main(string[] args)
+        {
+        // Subscribe to the event
+        Notify += DisplayMessage;
+
+        // Trigger the event
+        OnNotify("Event triggered!");
+
+        // Unsubscribe from the event
+        Notify -= DisplayMessage;
+        }
+
+        // Method to raise the event
+        public static void OnNotify(string message)
+        {
+        Notify?.Invoke(message);
+        }
+
+        // Event handler method
+        public static void DisplayMessage(string message)
+        {
+        Console.WriteLine(message);
+        }
+        }
+          </code></pre>
+        **Output:**
+        ```
+        Event triggered!
+        ```
+
+        ### Key Differences:
+        1. **Delegates**:
+        - Can be used directly to assign methods or pass methods around.
+        - Can be invoked directly.
+
+        2. **Events**:
+        - Are a special case of delegates used to represent notifications.
+        - Cannot be invoked from outside the class where they are defined (except from within the class itself).
+        - Provides built-in methods for adding/removing event handlers (`+=` and `-=`).
+
+        In summary, **delegates** provide the underlying mechanism for calling methods indirectly, while **events** provide a controlled way to notify subscribers when something happens.
+    </p>
+</body>
+</html>

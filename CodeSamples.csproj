@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CodeSamples.SOLID.LiskovSubstitution</StartupObject>
+    <StartupObject>CodeSamples.Creational.SingletonTest</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,13 +64,14 @@
     <Compile Include="Structural\Decorator.cs" />
     <Compile Include="Creational\FactoryMethod.cs" />
     <Compile Include="Creational\FactoryMethodExample.cs" />
-    <Compile Include="LSP.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="CSharp-Interview-Questions\CSharp.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
