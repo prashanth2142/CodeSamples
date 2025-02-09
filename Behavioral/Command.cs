@@ -10,8 +10,8 @@ namespace CodeSamples.Behavioral
     /*
 
     The Command design pattern encapsulates a request as an object, allowing users to parameterize clients with different requests, 
-    queue requests, log the requests, and support undoable operations. It involves separating objects that issue commands from objects that perform the command. 
-    Here’s a simple breakdown of the Command Design Pattern:
+    queue requests, log the requests, and support undoable operations. 
+    It involves separating objects that issue commands from objects that perform the command.
 
     Command: This is an interface for executing an operation.
     ConcreteCommand: This class extends the Command interface, implementing the Execute method by invoking the corresponding operation(s) on the Receiver object.

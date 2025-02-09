@@ -12,7 +12,8 @@ namespace CodeSamples.Behavioral
       but the specific handler isn’t known in advance, the request can be passed along a chain of handlers until one handles it.
    2. Decoupling Request Senders and Receivers: If you want to decouple the sender of a request from its receivers. 
       The sender doesn’t need to know which part of the chain will handle the request, promoting loose coupling in the system.
-   3. Conditional Handling of Requests: In scenarios where the handling of a request depends on a set of conditions or criteria that only the handlers can evaluate. 
+   3. Conditional Handling of Requests: In scenarios where the handling of a request depends on a set of conditions or criteria that 
+      only the handlers can evaluate. 
       Each handler in the chain can decide whether to process the request or pass it along.
    4. Dynamic Handling: If the handling logic needs to be changed or reconfigured dynamically at runtime,
       the Chain of Responsibility allows for adding or removing handlers from the chain.
